@@ -1,0 +1,26 @@
+{
+    "dataSource": "PostgresSQL",
+    "querySql":"select * from t_siem_alarm_policy_whole where alarm_level = :alarm_level"
+}
+
+{
+    "dataSource": "PostgresSQL",
+    "querySql":"select * from t_siem_alarm_policy_whole where alarm_level = :alarm_level LIMIT :pageSize OFFSET :pageNo",
+    "isPageQuery": true
+}
+
+{
+    "dataSource": "PostgresSQL",
+    "querySql":"select alarm_level, count(1) AS cnt from t_siem_alarm_policy_whole group by alarm_level"
+}
+
+{
+    "sqlPath": "DEFAULT_GROUP/postgressql_page",
+    "params": {
+        "alarm_level": 1
+    },
+    "page": {
+        "pageNo": 0,
+        "pageSize": 2
+    }
+}

@@ -1,0 +1,61 @@
+server:
+  port: 8081
+spring:
+  main:
+    allow-circular-references: true
+
+
+############################# 自定义配置 ###################################
+########## RestTemplate 配置
+rest:
+  connect:
+    timeout: 60000
+  read:
+    timeout: 60000
+########## 扫描 SQL 配置 默认支持 nacos 后续定制开发支持 MySQL、PG、Consul、Zookeeper 等
+scan:
+  sql:
+    plugin:
+      name: nacos
+    schdule:
+      interval: 60
+nacos:
+  address: hadoop101:8848
+  namespace:
+    id: public
+########### 数据源 PostgreSQL Druid JDBC 连接池配置
+postgres:
+  driverClassName: org.postgresql.Driver
+  url: jdbc:postgresql://192.168.2.142:5432/ssa?stringtype=unspecified
+  username: postgres
+  password: 12345)(*&^%RFVwsx
+  maxActive: 20
+  initialSize: 1
+  maxWait: 6000
+  minIdle: 1
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  poolPreparedStatements: true
+  maxOpenPreparedStatements: 20
+  asyncInit: true
+########### 数据源 MySQL Druid JDBC 连接池配置
+mysql:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://8.134.196.206:3306/demo?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&useSSL=false
+  username: root
+  password: 128505Tan..
+  maxActive: 20
+  initialSize: 1
+  maxWait: 6000
+  minIdle: 1
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  poolPreparedStatements: true
+  maxOpenPreparedStatements: 20
+  asyncInit: true
