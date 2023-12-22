@@ -43,7 +43,8 @@ public class DynamicDateSourceConfig implements EnvironmentAware, BeanDefinition
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry beanDefinitionRegistry) throws BeansException {
-        // todo 注册多数据源 (这里举个例子 可以基于 environment 获取多数据源配置信息 后续是否考虑使用动态多数据源)
+        // todo 注册多数据源 (这里举个例子 可以基于 environment 或者其他客户端 (ConsulClient、HTTPClient、JDBC 等一切可以获取配置信息)
+        // todo 获取多数据源配置信息并注册数据源 如果有动态数据源加载要求 可以在 DynamicDataSource 注册)
         registryPostgresSQLDataSource(beanDefinitionRegistry);
         registryMySQLDataSource(beanDefinitionRegistry);
     }
