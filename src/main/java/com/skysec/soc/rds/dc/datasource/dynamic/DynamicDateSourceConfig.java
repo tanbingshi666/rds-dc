@@ -19,7 +19,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.Properties;
 
-@Configuration
+// todo 是否开启动态多数据源
+// @Configuration
 public class DynamicDateSourceConfig implements EnvironmentAware, BeanDefinitionRegistryPostProcessor, ApplicationContextAware {
 
     private ApplicationContext applicationContext;

@@ -2,6 +2,7 @@ package com.skysec.soc.rds.dc.config;
 
 import com.skysec.soc.rds.dc.datasource.dynamic.DynamicDataSourceContextHolder;
 import com.skysec.soc.rds.dc.datasource.dynamic.DynamicDataSourceEnum;
+import com.skysec.soc.rds.dc.metadata.postgres.SyncPostgresSQLMetadata;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -47,5 +48,13 @@ public class TestRestTemplate {
         System.out.println(postgresResult);
         DynamicDataSourceContextHolder.removeDataSource();
 
+    }
+
+    @Autowired
+    SyncPostgresSQLMetadata syncPostgresSQLMetadata;
+
+    @Test
+    public void testSyncPGMetadata() {
+        syncPostgresSQLMetadata.doSyncMetadata();
     }
 }
