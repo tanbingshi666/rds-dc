@@ -6,7 +6,7 @@
 
 ​	目前基于 Nacos 作为配置中心，可插拔方式支持其他的配置中心，比如 Consul、Zookeeper、MySQL、Redis 等 (需要开发)
 
-# 三 案例
+# 三 案例 (仅提供参考具体样例参考doc目录)
 
 ## 3.1 配置 Nacos
 
