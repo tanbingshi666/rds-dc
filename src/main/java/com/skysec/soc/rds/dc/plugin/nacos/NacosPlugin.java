@@ -3,7 +3,7 @@ package com.skysec.soc.rds.dc.plugin.nacos;
 import cn.hutool.json.JSONUtil;
 import com.skysec.soc.rds.dc.event.plugin.PluginEventEnum;
 import com.skysec.soc.rds.dc.event.plugin.PluginLoadChangedEvent;
-import com.skysec.soc.rds.dc.pojo.model.sql.SqlQueryObject;
+import com.skysec.soc.rds.dc.pojo.model.Config;
 import com.skysec.soc.rds.dc.utils.FutureUtil;
 import com.skysec.soc.rds.dc.utils.SpringTool;
 import org.slf4j.Logger;
@@ -62,9 +62,9 @@ public class NacosPlugin {
                     if (responseGroupData != null && responseGroupData.get("code").equals(0) && responseGroupData.get("message").equals("success")) {
                         // todo 可以判断上一次缓存配置确定发生哪种变化 这里暂时 upsert
                         String targetData = (String) responseGroupData.get("data");
-                        SqlQueryObject sqlQueryObject = JSONUtil.toBean(targetData, SqlQueryObject.class);
-                        sqlQueryObject.setId(group + "/" + dataId);
-                        SpringTool.publish(new PluginLoadChangedEvent(this, group + "/" + dataId, sqlQueryObject, PluginEventEnum.ADD));
+                        Config config = JSONUtil.toBean(targetData, Config.class);
+                        config.setId(group + "/" + dataId);
+                        SpringTool.publish(new PluginLoadChangedEvent(this, group + "/" + dataId, config, PluginEventEnum.ADD));
                     } else {
                         LOGGER.info("向 Nacos 请求名称空间 {} group = {} dataid = {} 获取配置信息错误, {}", namespaceId, group, dataId, responseGroupData);
                     }

@@ -1,11 +1,16 @@
 package com.skysec.soc.rds.dc.service;
 
+import com.skysec.soc.rds.dc.pojo.model.Config;
 import com.skysec.soc.rds.dc.pojo.model.sql.SqlParam;
-import com.skysec.soc.rds.dc.pojo.model.sql.SqlQueryObject;
 import com.skysec.soc.rds.dc.pojo.model.sql.SqlExecResult;
+import com.skysec.soc.rds.dc.pojo.vo.Result;
+
+import java.util.Map;
 
 public interface DCService {
 
-    SqlExecResult execute(SqlQueryObject sqlQueryObject, SqlParam sqlParams);
+    SqlExecResult executeSQL(Config config, SqlParam sqlParams);
+
+    Object executeDSL(String index, String dsl, Map<String, Object> params);
 
 }

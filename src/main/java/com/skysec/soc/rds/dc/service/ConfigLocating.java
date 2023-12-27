@@ -1,8 +1,8 @@
 package com.skysec.soc.rds.dc.service;
 
-public interface SqlLocating<T> {
+public interface ConfigLocating<T> {
 
-    T locate(String sqlPath);
+    T locate(String path);
 
     void cache(T t);
 }

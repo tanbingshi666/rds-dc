@@ -1,16 +1,16 @@
-package com.skysec.soc.rds.dc.pojo.model.sql;
+package com.skysec.soc.rds.dc.pojo.model;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class SqlQueryObject {
+public class Config {
 
     private String id;
     private String dataSource;
-    private String querySql;
-    private boolean isPageQuery;
+    private String config;
+    private boolean isPage;
     private boolean isAsync;
 
 }

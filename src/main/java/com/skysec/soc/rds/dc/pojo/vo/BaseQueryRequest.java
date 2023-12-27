@@ -5,12 +5,10 @@ import lombok.Data;
 import java.util.Map;
 
 @Data
-public class BaseQueryRequest {
-
-    protected String sqlPath;
+public abstract class BaseQueryRequest {
 
     protected Map<String, Object> params;
 
-
+    public abstract String getPath();
 
 }

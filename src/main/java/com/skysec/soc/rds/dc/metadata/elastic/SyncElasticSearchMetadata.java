@@ -2,7 +2,7 @@ package com.skysec.soc.rds.dc.metadata.elastic;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.skysec.soc.rds.dc.datasource.postgres.ElasticSearchDataSource;
+import com.skysec.soc.rds.dc.datasource.elastic.ElasticSearchDataSource;
 import com.skysec.soc.rds.dc.metadata.SyncMetadata;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;

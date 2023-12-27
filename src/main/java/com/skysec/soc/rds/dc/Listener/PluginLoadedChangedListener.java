@@ -1,7 +1,7 @@
 package com.skysec.soc.rds.dc.Listener;
 
-import com.skysec.soc.rds.dc.pojo.model.sql.SqlQueryObject;
-import com.skysec.soc.rds.dc.service.SqlLocating;
+import com.skysec.soc.rds.dc.pojo.model.Config;
+import com.skysec.soc.rds.dc.service.ConfigLocating;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -11,22 +11,22 @@ public class PluginLoadedChangedListener extends AbstractPluginLoadedChangedList
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PluginLoadedChangedListener.class);
 
-    final SqlLocating<SqlQueryObject> sqlLocating;
+    final ConfigLocating<Config> configLocating;
 
-    public PluginLoadedChangedListener(SqlLocating<SqlQueryObject> sqlLocating) {
-        this.sqlLocating = sqlLocating;
+    public PluginLoadedChangedListener(ConfigLocating<Config> configLocating) {
+        this.configLocating = configLocating;
     }
 
     @Override
-    protected void add(SqlQueryObject sqlQueryObject) {
-        sqlLocating.cache(sqlQueryObject);
+    protected void add(Config config) {
+        configLocating.cache(config);
     }
 
     @Override
-    protected void modify(SqlQueryObject sqlQueryObject) {
+    protected void modify(Config config) {
     }
 
     @Override
-    protected void remove(SqlQueryObject sqlQueryObject) {
+    protected void remove(Config config) {
     }
 }

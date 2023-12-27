@@ -18,7 +18,7 @@
 
 ![image-20231221112828108](images\image-20231221112828108.png)
 
-具体的配置参考源码类：com.skysec.soc.rds.dc.pojo.model.sql.SqlQueryObject
+具体的配置参考源码类：com.skysec.soc.rds.dc.pojo.model.sql.Config
 
 ```java
 public class SqlQueryObject {

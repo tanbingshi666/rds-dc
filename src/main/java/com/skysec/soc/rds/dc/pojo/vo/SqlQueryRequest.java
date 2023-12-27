@@ -4,7 +4,9 @@ import com.skysec.soc.rds.dc.pojo.model.sql.SqlPageParam;
 import lombok.Data;
 
 @Data
-public class QueryRequest extends BaseQueryRequest {
+public class SqlQueryRequest extends BaseQueryRequest {
+
+    private String sqlPath;
 
     private SqlPageParam page;
 
@@ -17,4 +19,8 @@ public class QueryRequest extends BaseQueryRequest {
                 '}';
     }
 
+    @Override
+    public String getPath() {
+        return getSqlPath();
+    }
 }

@@ -3,7 +3,7 @@ package com.skysec.soc.rds.dc.config;
 import cn.hutool.json.JSONObject;
 import com.skysec.soc.rds.dc.datasource.dynamic.DynamicDataSourceContextHolder;
 import com.skysec.soc.rds.dc.datasource.dynamic.DynamicDataSourceEnum;
-import com.skysec.soc.rds.dc.datasource.postgres.ElasticSearchDataSource;
+import com.skysec.soc.rds.dc.datasource.elastic.ElasticSearchDataSource;
 import com.skysec.soc.rds.dc.metadata.elastic.SyncElasticSearchMetadata;
 import com.skysec.soc.rds.dc.metadata.postgres.SyncPostgresSQLMetadata;
 import org.junit.jupiter.api.Test;
@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,5 +80,28 @@ public class TestRestTemplate {
     @Test
     public void testSyncESMetadata() {
         syncElasticSearchMetadata.doSyncMetadata();
+    }
+
+    @Test
+    public void testESDSLExecute() {
+
+        String index = "event";
+        String dsl = "{\n" +
+                "    \"query\": {\n" +
+                "        \"range\": {\n" +
+                "            \"storagetime\": {\n" +
+                "                \"gte\": #{startTime},\n" +
+                "                \"lte\": #{endTime}\n" +
+                "            }\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
+        Map<String, Object> params = new HashMap<>();
+        params.put("startTime", 1698742172454L);
+        params.put("endTime", 1698742182454L);
+
+        final JSONObject json = elasticSearchDataSource.execute(index, dsl, params);
+        System.out.println(json);
+
     }
 }

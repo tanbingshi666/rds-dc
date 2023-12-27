@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class QueryResponse {
+public class SqlQueryResponse {
 
     private Long total;
     private Object list;
 
-    public QueryResponse(SqlExecResult result) {
+    public SqlQueryResponse(SqlExecResult result) {
         if (result != null) {
             setTotal(result.getTotal());
             setList(result.getResult());

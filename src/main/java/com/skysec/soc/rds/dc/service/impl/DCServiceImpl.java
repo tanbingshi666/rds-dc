@@ -2,8 +2,8 @@ package com.skysec.soc.rds.dc.service.impl;
 
 import com.skysec.soc.rds.dc.datasource.DataSourceManager;
 import com.skysec.soc.rds.dc.datasource.DataSourceProvider;
+import com.skysec.soc.rds.dc.pojo.model.Config;
 import com.skysec.soc.rds.dc.pojo.model.sql.SqlParam;
-import com.skysec.soc.rds.dc.pojo.model.sql.SqlQueryObject;
 import com.skysec.soc.rds.dc.pojo.model.sql.SqlExecResult;
 import com.skysec.soc.rds.dc.service.DCService;
 import org.slf4j.Logger;
@@ -13,6 +13,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StopWatch;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,20 +29,23 @@ public class DCServiceImpl implements DCService {
     }
 
     @Override
-    public SqlExecResult execute(SqlQueryObject sqlQueryObject, SqlParam sqlParams) {
+    public SqlExecResult executeSQL(Config config, SqlParam sqlParams) {
         SqlExecResult execResult = new SqlExecResult();
 
-        DataSourceProvider dataSource = dataSourceManager.getDataSource(sqlQueryObject.getDataSource());
-        if (sqlQueryObject.isPageQuery()) {
+        DataSourceProvider dataSource = dataSourceManager.getDataSource(config.getDataSource());
+        if (config.isPage()) {
+            if (sqlParams.getParams() == null) {
+                sqlParams.setParams(new HashMap<>());
+            }
             sqlParams.getParams().put("pageNo", sqlParams.getPageParam().getPageNo());
             sqlParams.getParams().put("pageSize", sqlParams.getPageParam().getPageSize());
         }
 
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        List<Map<String, Object>> queryResult = dataSource.execute(sqlQueryObject.getQuerySql(), sqlParams.getParams());
+        List<Map<String, Object>> queryResult = dataSource.execute(config.getConfig(), sqlParams.getParams());
         stopWatch.stop();
-        LOGGER.info("执行 SQL = [{}], 花费时间 = {}", sqlQueryObject.getQuerySql(), stopWatch.getTotalTimeMillis());
+        LOGGER.info("执行 SQL = [{}], 花费时间 = {} ms", config.getConfig(), stopWatch.getTotalTimeMillis());
 
         if (CollectionUtils.isEmpty(queryResult)) {
             execResult.setTotal(0L);
@@ -52,6 +56,11 @@ public class DCServiceImpl implements DCService {
         }
 
         return execResult;
+    }
+
+    @Override
+    public Object executeDSL(String index, String dsl, Map<String, Object> params) {
+        return dataSourceManager.getElasticSearchDataSource().execute(index, dsl, params);
     }
 
 }
