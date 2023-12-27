@@ -1,7 +1,10 @@
 package com.skysec.soc.rds.dc.config;
 
+import cn.hutool.json.JSONObject;
 import com.skysec.soc.rds.dc.datasource.dynamic.DynamicDataSourceContextHolder;
 import com.skysec.soc.rds.dc.datasource.dynamic.DynamicDataSourceEnum;
+import com.skysec.soc.rds.dc.datasource.postgres.ElasticSearchDataSource;
+import com.skysec.soc.rds.dc.metadata.elastic.SyncElasticSearchMetadata;
 import com.skysec.soc.rds.dc.metadata.postgres.SyncPostgresSQLMetadata;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +59,25 @@ public class TestRestTemplate {
     @Test
     public void testSyncPGMetadata() {
         syncPostgresSQLMetadata.doSyncMetadata();
+    }
+
+    @Autowired
+    ElasticSearchDataSource elasticSearchDataSource;
+
+    @Test
+    public void testElasticSearch() {
+        // final List<JSONObject> indexInfo = elasticSearchDataSource.listIndex();
+        // System.out.println(indexInfo);
+
+        final JSONObject indexMappingJson = elasticSearchDataSource.getIndexMapping("event");
+        System.out.println(indexMappingJson.toJSONString(0));
+    }
+
+    @Autowired
+    SyncElasticSearchMetadata syncElasticSearchMetadata;
+
+    @Test
+    public void testSyncESMetadata() {
+        syncElasticSearchMetadata.doSyncMetadata();
     }
 }

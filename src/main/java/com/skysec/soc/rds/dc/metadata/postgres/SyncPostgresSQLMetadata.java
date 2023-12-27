@@ -82,48 +82,46 @@ public class SyncPostgresSQLMetadata implements SyncMetadata {
                         return !tableName.contains(".");
                     }).collect(Collectors.toList());
             for (List<Object> tableInfo : targetTableInfo) {
-                final JSONObject tableMetadataResult = new JSONObject();
+                JSONObject tableMetadataResult = new JSONObject();
 
                 Object tableCatalog = tableInfo.get(0);
                 Object tableSchema = tableInfo.get(1);
                 Object tableName = tableInfo.get(2);
 
-                if ("t_siem_alarm_policy_whole".equals(tableName)) {
-                    tableMetadataResult.set("table_source", "PostgresSQL");
-                    tableMetadataResult.set("table_catalog", tableCatalog);
-                    tableMetadataResult.set("table_schema", tableSchema);
-                    tableMetadataResult.set("table_name", tableName);
+                tableMetadataResult.set("table_source", "PostgresSQL");
+                tableMetadataResult.set("table_catalog", tableCatalog);
+                tableMetadataResult.set("table_schema", tableSchema);
+                tableMetadataResult.set("table_name", tableName);
 
-                    SQLExecutionInfo tableMetadataInfo = JdbcUtil.executeQuery(dataSource, String.format(TABLE_METADATA_SQL, tableName));
-                    if (tableMetadataInfo.getSuccess()) {
-                        List<Object> tableMetadata = tableMetadataInfo.getRows().get(0);
-                        tableMetadataResult.set("table_rows", tableMetadata.get(2));
-                        tableMetadataResult.set("table_size", tableMetadata.get(3));
-                        tableMetadataResult.set("table_comment", tableMetadata.get(4));
-                    }
-
-                    tableMetadataResult.set("table_version", System.currentTimeMillis());
-
-                    final SQLExecutionInfo tableColumnMetadataInfo = JdbcUtil.executeQuery(dataSource, String.format(TABLE_COLUMN_METADATA_SQL, tableName));
-                    if (tableColumnMetadataInfo.getSuccess()) {
-                        for (List<Object> columnRow : tableColumnMetadataInfo.getRows()) {
-                            final List<String> columns = tableColumnMetadataInfo.getColumns();
-                            final JSONObject oneColumnJson = new JSONObject();
-                            for (int i = 0; i < columns.size(); i++) {
-                                oneColumnJson.set(columns.get(i), columnRow.get(i));
-                            }
-                            tableMetadataResult.set((String) columnRow.get(2), oneColumnJson.toJSONString(0));
-                        }
-                    }
-
-                    // todo 如何存储 PG 的元数据信息 ? 直接使用 ES 还是其他框架 比如图数据库 HugeGraph (百度开源, 推荐使用并统一管理平台的元数据以及后续规划的数据血缘)
-                    // todo ES 方式一: index = metadata_${tableName}, data = tableMetadataResult (推荐使用)
-                    // todo ES 方式二: index = metadata, data = tableMetadataResult (元数据字段放在一个 mapping 里面)
-                    // todo 图数据库 HugeGraph: 待定
-                    System.out.println(JSONUtil.toJsonPrettyStr(tableMetadataResult));
+                SQLExecutionInfo tableMetadataInfo = JdbcUtil.executeQuery(dataSource, String.format(TABLE_METADATA_SQL, tableName));
+                if (tableMetadataInfo.getSuccess()) {
+                    List<Object> tableMetadata = tableMetadataInfo.getRows().get(0);
+                    tableMetadataResult.set("table_rows", tableMetadata.get(2) + "");
+                    tableMetadataResult.set("table_size", tableMetadata.get(3) + "");
+                    tableMetadataResult.set("table_comment", tableMetadata.get(4));
                 }
 
+                tableMetadataResult.set("table_version", System.currentTimeMillis());
+
+                final SQLExecutionInfo tableColumnMetadataInfo = JdbcUtil.executeQuery(dataSource, String.format(TABLE_COLUMN_METADATA_SQL, tableName));
+                if (tableColumnMetadataInfo.getSuccess()) {
+                    for (List<Object> columnRow : tableColumnMetadataInfo.getRows()) {
+                        final List<String> columns = tableColumnMetadataInfo.getColumns();
+                        final JSONObject oneColumnJson = new JSONObject();
+                        for (int i = 0; i < columns.size(); i++) {
+                            oneColumnJson.set(columns.get(i), columnRow.get(i));
+                        }
+                        tableMetadataResult.set((String) columnRow.get(2), oneColumnJson.toJSONString(0));
+                    }
+                }
+
+                // todo 如何存储 PG 的元数据信息 ? 直接使用 ES 还是其他框架 比如图数据库 HugeGraph (百度开源, 推荐使用并统一管理平台的元数据以及后续规划的数据血缘)
+                // todo ES 方式一: index = metadata_${tableName}, data = tableMetadataResult (推荐使用)
+                // todo ES 方式二: index = metadata, data = tableMetadataResult (元数据字段放在一个 mapping 里面)
+                // todo 图数据库 HugeGraph: 待定
+                System.out.println(JSONUtil.toJsonPrettyStr(tableMetadataResult));
             }
+
         }
     }
 }

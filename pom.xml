@@ -27,6 +27,10 @@
         <postgresql.version>42.6.0</postgresql.version>
         <mysql.connector.version>5.1.49</mysql.connector.version>
 
+        <jackson.version>2.13.3</jackson.version>
+        <elastic.version>8.9.1</elastic.version>
+        <jakarta.json.version>2.0.1</jakarta.json.version>
+
     </properties>
 
     <dependencies>
@@ -76,6 +80,28 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.all.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.json</groupId>
+            <artifactId>jakarta.json-api</artifactId>
+            <version>${jakarta.json.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>co.elastic.clients</groupId>
+            <artifactId>elasticsearch-java</artifactId>
+            <version>${elastic.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>jakarta.json</groupId>
+                    <artifactId>jakarta.json-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>

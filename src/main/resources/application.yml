@@ -1,8 +1,8 @@
 server:
   port: 8081
-spring:
-  main:
-    allow-circular-references: true
+#spring:
+#  main:
+#    allow-circular-references: true
 
 
 ############################# 自定义配置 ###################################
@@ -59,3 +59,12 @@ mysql:
   poolPreparedStatements: true
   maxOpenPreparedStatements: 20
   asyncInit: true
+########### 数据源 ElasticSearch 配置
+elastic:
+  hosts:
+    - https://192.168.2.97:9200
+  username: elastic
+  password: POngw3zEs72TrZxsu*W2
+  fingerprint: d716dcccc35eaacfe9f1942e759389e3bdd762ced6f45faefe2dfb335bd6f0f2
+  connectionTimeout: 30000
+  socketTimeout: 300000
