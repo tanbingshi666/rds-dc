@@ -1,4 +1,4 @@
-package com.skysec.soc.rds.dc.pojo.model.sql;
+package com.skysec.soc.rds.dc.pojo.vo.sql;
 
 import lombok.Data;
 

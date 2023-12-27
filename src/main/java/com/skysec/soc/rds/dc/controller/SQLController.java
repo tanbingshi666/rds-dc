@@ -1,11 +1,11 @@
 package com.skysec.soc.rds.dc.controller;
 
-import com.skysec.soc.rds.dc.pojo.model.sql.SqlParam;
+import com.skysec.soc.rds.dc.pojo.vo.sql.SqlParam;
 import com.skysec.soc.rds.dc.pojo.model.Config;
-import com.skysec.soc.rds.dc.pojo.vo.SqlQueryRequest;
-import com.skysec.soc.rds.dc.pojo.vo.SqlQueryResponse;
+import com.skysec.soc.rds.dc.pojo.vo.sql.SqlQueryRequest;
+import com.skysec.soc.rds.dc.pojo.vo.sql.SqlQueryResponse;
 import com.skysec.soc.rds.dc.pojo.vo.Result;
-import com.skysec.soc.rds.dc.pojo.model.sql.SqlExecResult;
+import com.skysec.soc.rds.dc.pojo.vo.sql.SqlExecResult;
 import com.skysec.soc.rds.dc.service.DCService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

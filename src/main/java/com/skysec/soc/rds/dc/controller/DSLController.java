@@ -1,7 +1,7 @@
 package com.skysec.soc.rds.dc.controller;
 
 import com.skysec.soc.rds.dc.pojo.model.Config;
-import com.skysec.soc.rds.dc.pojo.vo.DslQueryRequest;
+import com.skysec.soc.rds.dc.pojo.vo.dsl.DslQueryRequest;
 import com.skysec.soc.rds.dc.pojo.vo.Result;
 import com.skysec.soc.rds.dc.service.DCService;
 import org.springframework.web.bind.annotation.PostMapping;

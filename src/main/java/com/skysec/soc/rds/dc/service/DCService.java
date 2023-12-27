@@ -1,9 +1,8 @@
 package com.skysec.soc.rds.dc.service;
 
 import com.skysec.soc.rds.dc.pojo.model.Config;
-import com.skysec.soc.rds.dc.pojo.model.sql.SqlParam;
-import com.skysec.soc.rds.dc.pojo.model.sql.SqlExecResult;
-import com.skysec.soc.rds.dc.pojo.vo.Result;
+import com.skysec.soc.rds.dc.pojo.vo.sql.SqlParam;
+import com.skysec.soc.rds.dc.pojo.vo.sql.SqlExecResult;
 
 import java.util.Map;
 

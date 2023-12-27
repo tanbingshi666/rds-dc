@@ -2,9 +2,9 @@ package com.skysec.soc.rds.dc.controller;
 
 import com.skysec.soc.rds.dc.pojo.model.Config;
 import com.skysec.soc.rds.dc.pojo.vo.BaseQueryRequest;
-import com.skysec.soc.rds.dc.pojo.vo.SqlQueryResponse;
+import com.skysec.soc.rds.dc.pojo.vo.sql.SqlQueryResponse;
 import com.skysec.soc.rds.dc.pojo.vo.Result;
-import com.skysec.soc.rds.dc.pojo.model.sql.SqlExecResult;
+import com.skysec.soc.rds.dc.pojo.vo.sql.SqlExecResult;
 import com.skysec.soc.rds.dc.service.ConfigLocating;
 import com.skysec.soc.rds.dc.utils.FutureUtil;
 import org.slf4j.Logger;

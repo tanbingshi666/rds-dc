@@ -1,6 +1,7 @@
-package com.skysec.soc.rds.dc.pojo.vo;
+package com.skysec.soc.rds.dc.pojo.vo.sql;
 
-import com.skysec.soc.rds.dc.pojo.model.sql.SqlPageParam;
+import com.skysec.soc.rds.dc.pojo.vo.BaseQueryRequest;
+import com.skysec.soc.rds.dc.pojo.vo.sql.SqlPageParam;
 import lombok.Data;
 
 @Data

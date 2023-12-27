@@ -1,5 +1,6 @@
-package com.skysec.soc.rds.dc.pojo.vo;
+package com.skysec.soc.rds.dc.pojo.vo.dsl;
 
+import com.skysec.soc.rds.dc.pojo.vo.BaseQueryRequest;
 import lombok.Data;
 
 @Data

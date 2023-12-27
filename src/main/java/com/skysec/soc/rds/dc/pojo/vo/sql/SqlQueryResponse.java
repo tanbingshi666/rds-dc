@@ -1,6 +1,6 @@
-package com.skysec.soc.rds.dc.pojo.vo;
+package com.skysec.soc.rds.dc.pojo.vo.sql;
 
-import com.skysec.soc.rds.dc.pojo.model.sql.SqlExecResult;
+import com.skysec.soc.rds.dc.pojo.vo.sql.SqlExecResult;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
